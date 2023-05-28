@@ -1,7 +1,7 @@
 {
   "name": "Defaultexport",
   "version": "1.0.0",
-  "description": "Your Figma plugin",
+  "description": "Easily set your Figma frames to the same export settings.",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json"
@@ -9,6 +9,9 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.19.0"
+    "@figma/plugin-typings": "^1.64.0"
+  },
+  "dependencies": {
+    "typescript": "^5.0.4"
   }
 }

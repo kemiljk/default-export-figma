@@ -2,5 +2,28 @@
   "name": "Default››export",
   "id": "939597261011175499",
   "api": "1.0.0",
-  "main": "code.js"
+  "main": "code.js",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  },
+  "parameterOnly": true,
+  "parameters": [
+    {
+      "name": "Export size",
+      "key": "size",
+      "allowFreeform": true,
+      "optional": true
+    },
+    {
+      "name": "Export format",
+      "key": "format",
+      "optional": true
+    },
+    {
+      "name": "Export preset",
+      "key": "preset",
+      "optional": true
+    }
+  ]
 }
