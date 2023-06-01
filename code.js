@@ -133,40 +133,44 @@ function hasValidSelection(nodes) {
 function handleExport(format, size, preset) {
     let settings = [];
     if (preset === null) {
-        settings = [{ format: format, suffix: `format !== 'SVG' || format !== 'PNG' ? @${String(size)}x : ''`, constraint: { type: 'SCALE', value: size } }];
-    }
-    if (preset.toLocaleLowerCase() === 'min') {
         settings = [
-            { format: 'PNG', suffix: '@1x', constraint: { type: 'SCALE', value: 1 } },
-            { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
-            { format: 'SVG', suffix: '' },
+            Object.assign({ format: format, suffix: format !== 'SVG' && format !== 'PDF' ? `@${String(size)}x` : '' }, (format !== 'SVG' ? { constraint: { type: 'SCALE', value: size } } : {})),
         ];
     }
-    else if (preset.toLocaleLowerCase() === 'max') {
-        settings = [
-            { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
-            { format: 'PNG', suffix: '@3x', constraint: { type: 'SCALE', value: 3 } },
-            { format: 'SVG', suffix: '' },
-        ];
-    }
-    else if (preset.toLocaleLowerCase() === 'ios') {
-        settings = [
-            { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
-            { format: 'PNG', suffix: '@3x', constraint: { type: 'SCALE', value: 3 } },
-            { format: 'SVG', suffix: '' },
-        ];
-    }
-    else if (preset.toLocaleLowerCase() === 'android') {
-        settings = [
-            { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
-            { format: 'SVG', suffix: '' },
-        ];
-    }
-    else if (preset.toLocaleLowerCase() === 'default') {
-        settings = [
-            { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
-            { format: 'SVG', suffix: '' },
-        ];
+    else if (preset !== null) {
+        if (preset.toLocaleLowerCase() === 'min') {
+            settings = [
+                { format: 'PNG', suffix: '@1x', constraint: { type: 'SCALE', value: 1 } },
+                { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
+                { format: 'SVG', suffix: '' },
+            ];
+        }
+        else if (preset.toLocaleLowerCase() === 'max') {
+            settings = [
+                { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
+                { format: 'PNG', suffix: '@3x', constraint: { type: 'SCALE', value: 3 } },
+                { format: 'SVG', suffix: '' },
+            ];
+        }
+        else if (preset.toLocaleLowerCase() === 'ios') {
+            settings = [
+                { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
+                { format: 'PNG', suffix: '@3x', constraint: { type: 'SCALE', value: 3 } },
+                { format: 'SVG', suffix: '' },
+            ];
+        }
+        else if (preset.toLocaleLowerCase() === 'android') {
+            settings = [
+                { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
+                { format: 'SVG', suffix: '' },
+            ];
+        }
+        else if (preset.toLocaleLowerCase() === 'default') {
+            settings = [
+                { format: 'PNG', suffix: '@2x', constraint: { type: 'SCALE', value: 2 } },
+                { format: 'SVG', suffix: '' },
+            ];
+        }
     }
     console.log(format, size, preset, settings);
     function set(nodes) {
